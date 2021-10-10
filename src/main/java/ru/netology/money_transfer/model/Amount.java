@@ -2,7 +2,7 @@ package ru.netology.money_transfer.model;
 
 public class Amount {
     private int value;
-    private int string;
+    private String currency;
 
     public Amount() {
     }
@@ -15,19 +15,19 @@ public class Amount {
         this.value = value;
     }
 
-    public int getString() {
-        return string;
+    public String getCurrency() {
+        return currency;
     }
 
-    public void setString(int string) {
-        this.string = string;
+    public void setCurrency(String currency) {
+        this.currency = currency;
     }
 
     @Override
     public String toString() {
         return "Amount{" +
                 "value=" + value +
-                ", string=" + string +
+                ", currency=" + currency +
                 '}';
     }
 }
