@@ -5,4 +5,5 @@ public class Card {
     private String validTill;
     private String cvv;
     private Amount amount;
+    private String code;
 }
