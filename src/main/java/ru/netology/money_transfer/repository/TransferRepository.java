@@ -30,4 +30,8 @@ public class TransferRepository {
         return cards.get(cardFromNumber);
     }
 
+    public boolean containsCard(String number) {
+        return cards.containsKey(number);
+    }
+
 }
