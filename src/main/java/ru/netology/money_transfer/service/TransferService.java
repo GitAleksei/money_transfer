@@ -26,22 +26,31 @@ public class TransferService {
     public Answer postTransfer(MsgTransfer msgTransfer) {
         LOGGER.info(msgTransfer.toString());
 
+        // To do check msgTransfer
         transfers.put(operationId.incrementAndGet() + "", msgTransfer);
 
-        Answer answer = new Answer();
-        answer.setOperationId(operationId + "");
-        return answer;
+        return new Answer(operationId + "");
     }
 
     public Answer postConfirmOperation(MsgConfirmOperation msgConfirmOperation) {
         LOGGER.info(msgConfirmOperation.toString());
-        var operId = msgConfirmOperation.getOperationId();
-        if (transfers.containsKey(operId)) {
-            var msg = transfers.remove(operId);
+
+        var operationIdFrom = msgConfirmOperation.getOperationId();
+
+
+        MsgTransfer msg;
+        if (transfers.containsKey(operationIdFrom)) {
+            msg = transfers.get(operationIdFrom);
+        } else {
+            // New exception()
+            return new Answer(operationIdFrom);
         }
         // To do operation transfer
-        Answer answer = new Answer();
-        answer.setOperationId(operId);
-        return answer;
+        var cardFromNumber = msg.getCardFromNumber();
+        transferRepository.getCard(cardFromNumber);
+
+        transfers.remove(operationIdFrom);
+
+        return new Answer(operationIdFrom);
     }
 }

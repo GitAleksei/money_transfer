@@ -6,6 +6,10 @@ public class Answer {
     public Answer() {
     }
 
+    public Answer(String operationId) {
+        this.operationId = operationId;
+    }
+
     public String getOperationId() {
         return operationId;
     }

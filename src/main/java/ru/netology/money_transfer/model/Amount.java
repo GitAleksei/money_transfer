@@ -7,6 +7,11 @@ public class Amount {
     public Amount() {
     }
 
+    public Amount(int value, String currency) {
+        this.value = value;
+        this.currency = currency;
+    }
+
     public int getValue() {
         return value;
     }
