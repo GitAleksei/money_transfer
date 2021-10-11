@@ -1,13 +1,13 @@
 package ru.netology.money_transfer.model;
 
-public class Message {
+public class MsgTransfer {
     private String cardFromNumber;
     private String cardFromValidTill;
     private String cardFromCVV;
     private String cardToNumber;
     private Amount amount;
 
-    public Message() {
+    public MsgTransfer() {
     }
 
     public String getCardFromNumber() {

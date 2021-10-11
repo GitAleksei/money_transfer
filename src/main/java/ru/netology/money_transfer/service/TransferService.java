@@ -3,7 +3,9 @@ package ru.netology.money_transfer.service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import ru.netology.money_transfer.model.Message;
+import ru.netology.money_transfer.model.Answer;
+import ru.netology.money_transfer.model.MsgConfirmOperation;
+import ru.netology.money_transfer.model.MsgTransfer;
 import ru.netology.money_transfer.repository.TransferRepository;
 
 @Service
@@ -15,8 +17,17 @@ public class TransferService {
         this.transferRepository = transferRepository;
     }
 
-    public String postTransfer(Message message) {
-        LOGGER.info(message.toString());
-        return "123";
+    public Answer postTransfer(MsgTransfer msgTransfer) {
+        LOGGER.info(msgTransfer.toString());
+        Answer answer = new Answer();
+        answer.setOperationId("123");
+        return answer;
+    }
+
+    public Answer postConfirmOperation(MsgConfirmOperation msgConfirmOperation) {
+        LOGGER.info(msgConfirmOperation.toString());
+        Answer answer = new Answer();
+        answer.setOperationId("1234");
+        return answer;
     }
 }

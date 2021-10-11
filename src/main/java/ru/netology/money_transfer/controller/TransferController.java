@@ -4,7 +4,9 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import ru.netology.money_transfer.model.Message;
+import ru.netology.money_transfer.model.Answer;
+import ru.netology.money_transfer.model.MsgTransfer;
+import ru.netology.money_transfer.model.MsgConfirmOperation;
 import ru.netology.money_transfer.service.TransferService;
 
 @RestController
@@ -17,8 +19,12 @@ public class TransferController {
     }
 
     @PostMapping("/transfer")
-    public String postTransfer(@RequestBody Message message) {
-        transferService.postTransfer(message);
-        return "12";
+    public Answer postTransfer(@RequestBody MsgTransfer msgTransfer) {
+        return transferService.postTransfer(msgTransfer);
+    }
+
+    @PostMapping("/confirmOperation")
+    public Answer postConfirmOperation(@RequestBody MsgConfirmOperation msgConfirmOperation) {
+        return transferService.postConfirmOperation(msgConfirmOperation);
     }
 }
