@@ -29,6 +29,7 @@ public class TransferService {
         // To do check msgTransfer
         transfers.put(operationId.incrementAndGet() + "", msgTransfer);
 
+
         return new Answer(operationId + "");
     }
 
