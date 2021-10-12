@@ -4,9 +4,9 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import ru.netology.money_transfer.model.MsgAnswer;
-import ru.netology.money_transfer.model.MsgTransfer;
-import ru.netology.money_transfer.model.MsgConfirmOperation;
+import ru.netology.money_transfer.model.msg.MsgAnswer;
+import ru.netology.money_transfer.model.msg.MsgTransfer;
+import ru.netology.money_transfer.model.msg.MsgConfirmOperation;
 import ru.netology.money_transfer.service.TransferService;
 
 @RestController

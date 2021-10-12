@@ -1,4 +1,4 @@
-package ru.netology.money_transfer.model;
+package ru.netology.money_transfer.model.msg;
 
 public class MsgAnswer {
     private String operationId;

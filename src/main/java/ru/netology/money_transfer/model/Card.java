@@ -57,4 +57,15 @@ public class Card {
     public void setCode(String code) {
         this.code = code;
     }
+
+    @Override
+    public String toString() {
+        return "Card{" +
+                "number='" + number + '\'' +
+                ", validTill='" + validTill + '\'' +
+                ", cvv='" + cvv + '\'' +
+                ", amount=" + amount +
+                ", code='" + code + '\'' +
+                '}';
+    }
 }

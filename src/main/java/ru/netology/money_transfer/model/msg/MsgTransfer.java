@@ -1,4 +1,6 @@
-package ru.netology.money_transfer.model;
+package ru.netology.money_transfer.model.msg;
+
+import ru.netology.money_transfer.model.Amount;
 
 public class MsgTransfer {
     private String cardFromNumber;

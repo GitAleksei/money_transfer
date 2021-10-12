@@ -5,6 +5,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import ru.netology.money_transfer.exception.UnauthorizedCard;
 import ru.netology.money_transfer.model.*;
+import ru.netology.money_transfer.model.msg.MsgAnswer;
+import ru.netology.money_transfer.model.msg.MsgConfirmOperation;
+import ru.netology.money_transfer.model.msg.MsgTransfer;
 import ru.netology.money_transfer.repository.TransferRepository;
 
 import java.util.Map;
@@ -60,6 +63,7 @@ public class TransferService {
 
         transferMoney(cardFrom, cardTo, msgTransfer.getAmount());
 
+        LOGGER.info(transferRepository.toString());
         return new MsgAnswer(operationIdFrom);
     }
 
