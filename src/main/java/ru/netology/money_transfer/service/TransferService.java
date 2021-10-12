@@ -3,6 +3,7 @@ package ru.netology.money_transfer.service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import ru.netology.money_transfer.exception.ForbiddenException;
 import ru.netology.money_transfer.exception.UnauthorizedCard;
 import ru.netology.money_transfer.model.*;
 import ru.netology.money_transfer.model.fee.Fee;
@@ -62,6 +63,10 @@ public class TransferService {
         var cardFrom = transferRepository.getCard(cardFromNumber);
         var cardToNumber = msgTransfer.getCardToNumber();
         var cardTo = transferRepository.getCard(cardToNumber);
+
+        if (!msgConfirmOperation.getCode().equals(cardFrom.getCode())) {
+            throw new ForbiddenException("Verification code does not match");
+        }
 
         transferMoney(cardFrom, cardTo, msgTransfer.getAmount());
 
