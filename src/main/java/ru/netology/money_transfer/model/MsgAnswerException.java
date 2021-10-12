@@ -1,13 +1,13 @@
 package ru.netology.money_transfer.model;
 
-public class AnswerException {
+public class MsgAnswerException {
     private String message;
     private int id;
 
-    public AnswerException() {
+    public MsgAnswerException() {
     }
 
-    public AnswerException(String message, int id) {
+    public MsgAnswerException(String message, int id) {
         this.message = message;
         this.id = id;
     }

@@ -1,12 +1,12 @@
 package ru.netology.money_transfer.model;
 
-public class Answer {
+public class MsgAnswer {
     private String operationId;
 
-    public Answer() {
+    public MsgAnswer() {
     }
 
-    public Answer(String operationId) {
+    public MsgAnswer(String operationId) {
         this.operationId = operationId;
     }
 

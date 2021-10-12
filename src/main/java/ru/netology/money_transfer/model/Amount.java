@@ -28,6 +28,14 @@ public class Amount {
         this.currency = currency;
     }
 
+    public void increment(Amount amount) {
+        value = value + amount.value;
+    }
+
+    public Amount negative() {
+        return new Amount(-value, currency);
+    }
+
     @Override
     public String toString() {
         return "Amount{" +
