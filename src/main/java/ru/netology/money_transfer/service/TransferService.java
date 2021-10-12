@@ -5,6 +5,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import ru.netology.money_transfer.exception.UnauthorizedCard;
 import ru.netology.money_transfer.model.*;
+import ru.netology.money_transfer.model.fee.Fee;
+import ru.netology.money_transfer.model.fee.FeeImpl;
 import ru.netology.money_transfer.model.msg.MsgAnswer;
 import ru.netology.money_transfer.model.msg.MsgConfirmOperation;
 import ru.netology.money_transfer.model.msg.MsgTransfer;
@@ -68,7 +70,9 @@ public class TransferService {
     }
 
     private void transferMoney(Card cardFrom, Card cardTo, Amount amount) {
-        cardFrom.getAmount().increment(amount.negative());
         cardTo.getAmount().increment(amount);
+        Fee<Amount> fee = new FeeImpl();
+        amount.increment(fee.calculate(amount));
+        cardFrom.getAmount().increment(amount.negative());
     }
 }
