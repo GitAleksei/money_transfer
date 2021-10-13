@@ -38,9 +38,6 @@ public class Amount {
 
     @Override
     public String toString() {
-        return "Amount{" +
-                "value=" + value +
-                ", currency=" + currency +
-                '}';
+        return value / 100 + "." + value % 100 + currency;
     }
 }

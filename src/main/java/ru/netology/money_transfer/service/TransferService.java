@@ -2,6 +2,7 @@ package ru.netology.money_transfer.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import ru.netology.money_transfer.exception.ForbiddenException;
 import ru.netology.money_transfer.exception.UnauthorizedCard;
@@ -23,15 +24,15 @@ public class TransferService {
     private final AtomicInteger operationId = new AtomicInteger();
     public static final Logger LOGGER = LoggerFactory.getLogger(TransferService.class);
     private final TransferRepository transferRepository;
+    private final Fee<Amount> fee;
 
-    public TransferService(TransferRepository transferRepository) {
+    public TransferService(TransferRepository transferRepository, Fee<Amount> fee) {
         this.transferRepository = transferRepository;
+        this.fee = fee;
     }
 
 
     public MsgAnswer postTransfer(MsgTransfer msgTransfer) throws UnauthorizedCard {
-        LOGGER.info("postTransfer");
-
         Card card = transferRepository.getCard(msgTransfer.getCardFromNumber());
 
         if (card == null || !(card.getCvv().equals(msgTransfer.getCardFromCVV()))
@@ -43,15 +44,12 @@ public class TransferService {
         }
 
         transfers.put(operationId.incrementAndGet() + "", msgTransfer);
-        LOGGER.info(msgTransfer.toString());
+
         return new MsgAnswer(operationId + "");
     }
 
 
     public MsgAnswer postConfirmOperation(MsgConfirmOperation msgConfirmOperation) {
-        LOGGER.info(msgConfirmOperation.toString());
-        LOGGER.info(String.valueOf(transfers));
-
         var operationIdFrom = msgConfirmOperation.getOperationId();
 
         MsgTransfer msgTransfer;
@@ -76,8 +74,12 @@ public class TransferService {
 
     private void transferMoney(Card cardFrom, Card cardTo, Amount amount) {
         cardTo.getAmount().increment(amount);
-        Fee<Amount> fee = new FeeImpl();
-        amount.increment(fee.calculate(amount));
+        var feeAmount = fee.calculate(amount);
+
+        LOGGER.info("Card from = " + cardFrom.getNumber() + ", card to = " + cardTo.getNumber() +
+                ", amount = " + amount + ", fee = " + feeAmount + ", operation = completed");
+
+        amount.increment(feeAmount);
         cardFrom.getAmount().increment(amount.negative());
     }
 }
