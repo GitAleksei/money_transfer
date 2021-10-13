@@ -11,7 +11,6 @@ public class FeeImpl implements Fee<Amount> {
 
     @Override
     public Amount calculate(Amount amount) {
-        System.out.println(feePercent);
         return new Amount((int) (amount.getValue() * feePercent), amount.getCurrency());
     }
 }

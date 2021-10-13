@@ -6,9 +6,11 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 public class MsgTransfer {
-    @Pattern(regexp = "[0-9]{15}")
+    @Pattern(regexp = "[0-9]{16}")
     private String cardFromNumber;
+    @Pattern(regexp = "[0-9]{2}[/][0-9]{2}")
     private String cardFromValidTill;
+    @Pattern(regexp = "[0-9]{3}")
     private String cardFromCVV;
     @Pattern(regexp = "[0-9]{16}")
     private String cardToNumber;
