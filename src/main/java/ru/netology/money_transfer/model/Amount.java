@@ -1,6 +1,5 @@
 package ru.netology.money_transfer.model;
 
-import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 
 public class Amount {

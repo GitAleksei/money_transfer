@@ -7,7 +7,7 @@ import javax.validation.constraints.Pattern;
 public class MsgTransfer {
     @Pattern(regexp = "[0-9]{16}")
     private String cardFromNumber;
-    @Pattern(regexp = "[0-9]{2}[/][0-9]{2}")
+    @Pattern(regexp = "(0?[1-9]|1[012])[/][0-9]{2}")
     private String cardFromValidTill;
     @Pattern(regexp = "[0-9]{3}")
     private String cardFromCVV;
