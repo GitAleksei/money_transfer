@@ -1,5 +1,6 @@
 package ru.netology.money_transfer.controller;
 
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -9,8 +10,11 @@ import ru.netology.money_transfer.model.msg.MsgTransfer;
 import ru.netology.money_transfer.model.msg.MsgConfirmOperation;
 import ru.netology.money_transfer.service.TransferService;
 
+import javax.validation.Valid;
+
 @RestController
 @CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
+@Validated
 public class TransferController {
     private final TransferService transferService;
 
@@ -19,7 +23,7 @@ public class TransferController {
     }
 
     @PostMapping("/transfer")
-    public MsgAnswer postTransfer(@RequestBody MsgTransfer msgTransfer) {
+    public MsgAnswer postTransfer(@Valid @RequestBody MsgTransfer msgTransfer) {
         return transferService.postTransfer(msgTransfer);
     }
 
