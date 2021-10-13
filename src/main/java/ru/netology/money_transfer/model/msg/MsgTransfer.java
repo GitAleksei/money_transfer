@@ -3,7 +3,6 @@ package ru.netology.money_transfer.model.msg;
 import ru.netology.money_transfer.model.Amount;
 
 import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
 
 public class MsgTransfer {
     @Pattern(regexp = "[0-9]{16}")

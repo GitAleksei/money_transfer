@@ -14,7 +14,7 @@ public class TransferRepository {
     public TransferRepository() {
         cards.put("1111111111111111",
                 new Card("1111111111111111", "11/22", "111",
-                        new Amount(10_000_00, "RUR"), "0000"));
+                        new Amount(10_000_00, "RUR"), "0001"));
         cards.put("2222222222222222",
                 new Card("2222222222222222", "11/22", "111",
                         new Amount(10_000_00, "RUR"), "0000"));
