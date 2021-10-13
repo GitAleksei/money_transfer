@@ -42,6 +42,6 @@ public class Amount {
 
     @Override
     public String toString() {
-        return value / 100 + "." + value % 100 + currency;
+        return String.format("%.2f%s", value / 100.0, currency);
     }
 }
