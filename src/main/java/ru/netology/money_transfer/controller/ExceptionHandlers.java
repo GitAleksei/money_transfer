@@ -1,5 +1,7 @@
 package ru.netology.money_transfer.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -14,6 +16,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 @RestControllerAdvice
 public class ExceptionHandlers {
+    public static final Logger LOGGER = LoggerFactory.getLogger(ExceptionHandlers.class);
+
     private final AtomicInteger exceptionId = new AtomicInteger();
 
     @ExceptionHandler(UnauthorizedCard.class)
@@ -36,8 +40,10 @@ public class ExceptionHandlers {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<MsgAnswerException> handlerCVE(MethodArgumentNotValidException e) {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                .body(new MsgAnswerException("The form is filled out incorrectly ",
-                        exceptionId.incrementAndGet()));
+        var msg = new MsgAnswerException("The form is filled out incorrectly",
+                exceptionId.incrementAndGet());
+        LOGGER.error(msg.getMessage());
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(msg);
     }
 }
