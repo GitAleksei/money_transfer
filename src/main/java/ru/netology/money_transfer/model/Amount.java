@@ -1,6 +1,7 @@
 package ru.netology.money_transfer.model;
 
 import javax.validation.constraints.Min;
+import java.util.Objects;
 
 public class Amount {
     @Min(0)
@@ -13,6 +14,19 @@ public class Amount {
     public Amount(int value, String currency) {
         this.value = value;
         this.currency = currency;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Amount amount = (Amount) o;
+        return value == amount.value && currency.equals(amount.currency);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value, currency);
     }
 
     public int getValue() {

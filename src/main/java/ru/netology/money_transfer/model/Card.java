@@ -62,10 +62,7 @@ public class Card {
     public String toString() {
         return "Card{" +
                 "number='" + number + '\'' +
-                ", validTill='" + validTill + '\'' +
-                ", cvv='" + cvv + '\'' +
                 ", amount=" + amount +
-                ", code='" + code + '\'' +
                 '}';
     }
 }
