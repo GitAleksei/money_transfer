@@ -11,13 +11,15 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.testcontainers.containers.GenericContainer;
-import ru.netology.money_transfer.model.msg.MsgAnswerException;
-import ru.netology.money_transfer.model.msg.MsgConfirmOperation;
+import ru.netology.money_transfer.model.msg.MsgAnswer;
+import ru.netology.money_transfer.model.msg.MsgTransfer;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class MoneyTransferApplicationTests {
-    private static final String OPERATION_ID = "3";
-    private static final String CODE = "0001";
+    private static final String CARD_FROM_NUMBER = "1111111111111111";
+    private static final String CARD_FROM_CVV = "111";
+    private static final String CARD_FROM_VALID_TILL = "11/22";
+    private static final String CARD_TO_NUMBER = "2222222222222222";
 
     @Autowired
     TestRestTemplate restTemplate;
@@ -31,29 +33,31 @@ class MoneyTransferApplicationTests {
     }
 
     @Test
-    void responseExceptionTest() {
+    void responseTransferTest() {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
-        MsgConfirmOperation msgConfirmOperation = new MsgConfirmOperation();
-        msgConfirmOperation.setOperationId(OPERATION_ID);
-        msgConfirmOperation.setCode(CODE);
+        MsgTransfer msgTransfer = new MsgTransfer();
+        msgTransfer.setCardFromNumber(CARD_FROM_NUMBER);
+        msgTransfer.setCardFromCVV(CARD_FROM_CVV);
+        msgTransfer.setCardFromValidTill(CARD_FROM_VALID_TILL);
+        msgTransfer.setCardToNumber(CARD_TO_NUMBER);
 
-        HttpEntity<MsgConfirmOperation> requestEntity =
-                new HttpEntity<>(msgConfirmOperation, headers);
+        HttpEntity<MsgTransfer> requestEntity =
+                new HttpEntity<>(msgTransfer, headers);
 
-        ResponseEntity<MsgAnswerException> forEntity =
+        ResponseEntity<MsgAnswer> forEntity =
                 restTemplate.postForEntity("http://localhost:" +
                         transfer_container.getMappedPort(8080) + "/transfer",
                         requestEntity,
-                        MsgAnswerException.class);
+                        MsgAnswer.class);
 
         var actual = forEntity.getBody();
 
-        System.out.println(actual);
-        String expected = "operationId is not registered";
+        String expected = "1";
 
-        Assertions.assertEquals(expected, actual.getMessage());
+        assert actual != null;
+        Assertions.assertEquals(expected, actual.getOperationId());
     }
 
 }

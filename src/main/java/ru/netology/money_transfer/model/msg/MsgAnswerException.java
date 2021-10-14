@@ -42,4 +42,12 @@ public class MsgAnswerException {
     public int hashCode() {
         return Objects.hash(message, id);
     }
+
+    @Override
+    public String toString() {
+        return "MsgAnswerException{" +
+                "message='" + message + '\'' +
+                ", id=" + id +
+                '}';
+    }
 }

@@ -1,0 +1,9 @@
+POST http://localhost:8080/transfer
+Content-Type: application/json
+
+{
+  "operationId": "3",
+  "code": "0001"
+}
+###
+

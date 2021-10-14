@@ -33,7 +33,7 @@ public class ExceptionHandlers {
     }
 
     @ExceptionHandler(ForbiddenException.class)
-    public ResponseEntity<MsgAnswerException> handlerUOI(ForbiddenException e) {
+    public ResponseEntity<MsgAnswerException> handlerFE(ForbiddenException e) {
         return ResponseEntity.status(HttpStatus.FORBIDDEN)
                 .body(new MsgAnswerException(e.getMessage(), exceptionId.incrementAndGet()));
     }
@@ -45,5 +45,14 @@ public class ExceptionHandlers {
         LOGGER.error(msg.getMessage());
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(msg);
+    }
+
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity<MsgAnswerException> handlerCVE(RuntimeException e) {
+        var msg = new MsgAnswerException("Internal server error",
+                exceptionId.incrementAndGet());
+        LOGGER.error(msg.getMessage());
+
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(msg);
     }
 }

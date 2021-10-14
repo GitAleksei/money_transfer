@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import ru.netology.money_transfer.exception.ForbiddenException;
 import ru.netology.money_transfer.exception.UnauthorizedCard;
+import ru.netology.money_transfer.exception.UnauthorizedOperationId;
 import ru.netology.money_transfer.model.*;
 import ru.netology.money_transfer.model.fee.Fee;
 import ru.netology.money_transfer.model.msg.MsgAnswer;
@@ -52,7 +53,7 @@ public class TransferService {
 
         MsgTransfer msgTransfer;
         if ((msgTransfer = transfers.remove(operationIdFrom)) == null) {
-            throw new UnsupportedOperationException("operationId is not registered");
+            throw new UnauthorizedOperationId("operationId is not registered");
         }
 
         System.out.println(msgTransfer);
