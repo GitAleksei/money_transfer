@@ -10,7 +10,7 @@ import ru.netology.money_transfer.model.Amount;
 class FeeImplTest {
 
     @Autowired
-    Fee<Amount> fee = new FeeImpl();
+    Fee<Amount> fee;
 
     @Test
     void calculateTest() {

@@ -55,6 +55,8 @@ public class TransferService {
             throw new UnsupportedOperationException("operationId is not registered");
         }
 
+        System.out.println(msgTransfer);
+
         var cardFromNumber = msgTransfer.getCardFromNumber();
         var cardFrom = transferRepository.getCard(cardFromNumber);
         var cardToNumber = msgTransfer.getCardToNumber();
