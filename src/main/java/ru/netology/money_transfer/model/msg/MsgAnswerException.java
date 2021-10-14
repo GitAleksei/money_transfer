@@ -1,5 +1,7 @@
 package ru.netology.money_transfer.model.msg;
 
+import java.util.Objects;
+
 public class MsgAnswerException {
     private String message;
     private int id;
@@ -26,5 +28,18 @@ public class MsgAnswerException {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        MsgAnswerException that = (MsgAnswerException) o;
+        return id == that.id && message.equals(that.message);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(message, id);
     }
 }

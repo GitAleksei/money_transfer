@@ -13,7 +13,7 @@ import ru.netology.money_transfer.service.TransferService;
 import javax.validation.Valid;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
+@CrossOrigin(origins = "${cross.origin.host.name}", maxAge = 3600)
 @Validated
 public class TransferController {
     private final TransferService transferService;
